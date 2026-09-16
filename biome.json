@@ -73,7 +73,7 @@
     },
     {
       "includes": [
-        "**/src/components/base/**",
+        "**/src/components/ui/**",
         "**/src/components/application/**",
         "**/src/components/foundations/**"
       ],
