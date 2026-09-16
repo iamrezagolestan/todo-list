@@ -1,0 +1,27 @@
+{
+  "tasksForm": {
+    "title": "افزودن تسک",
+    "description": "تسک‌های هفتگی / بلندمدت را اینجا اضافه کنید.",
+    "name": "نام",
+    "namePlaceholder": "نام تسک خود را وارد کنید...",
+    "selectDays": "انتخاب روزها",
+    "days": "روزها",
+    "allDays": "همه روزها",
+    "saturday": "شنبه",
+    "sunday": "یکشنبه",
+    "monday": "دوشنبه",
+    "tuesday": "سه‌شنبه",
+    "wednesday": "چهارشنبه",
+    "thursday": "پنجشنبه",
+    "friday": "جمعه",
+    "isParent": "تسک والد است",
+    "chooseParent": "انتخاب تسک والد",
+    "parents": "تسک‌های والد",
+    "selectParent": "یک تسک والد انتخاب کنید",
+    "descriptionLabel": "توضیحات",
+    "descriptionPlaceholder": "توضیحات تسک را بنویسید...",
+    "descriptionHint": "مراحل انجام، رفتار مورد انتظار و نتیجه واقعی را وارد کنید.",
+    "characters": "{count}/100 کاراکتر",
+    "submit": "ثبت"
+  }
+}

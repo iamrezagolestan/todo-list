@@ -1,0 +1,27 @@
+{
+  "tasksForm": {
+    "title": "Add Tasks",
+    "description": "Add weekly / long-term tasks here.",
+    "name": "Name",
+    "namePlaceholder": "Enter your task name...",
+    "selectDays": "Select days",
+    "days": "Days",
+    "allDays": "All days",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "isParent": "Is parent",
+    "chooseParent": "Choose parent",
+    "parents": "Parents",
+    "selectParent": "Select a parent",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Write task's description...",
+    "descriptionHint": "Include steps to reproduce, expected behavior, and what actually happened.",
+    "characters": "{count}/100 characters",
+    "submit": "Submit"
+  }
+}
