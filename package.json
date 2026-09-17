@@ -26,6 +26,7 @@
     "next": "16.3.4",
     "next-intl": "^4.14.5",
     "next-themes": "^0.4.6",
+    "pg": "^8.23.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "shadcn": "^4.21.0",
@@ -33,12 +34,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.13",
+    "@pgtyped/cli": "^2.4.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dbmate": "^2.35.1",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "dbmate": "^2.35.1"
+    "typescript": "^5"
   }
 }
