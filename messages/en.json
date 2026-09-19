@@ -23,5 +23,37 @@
     "descriptionHint": "Include steps to reproduce, expected behavior, and what actually happened.",
     "characters": "{count}/100 characters",
     "submit": "Submit"
-  }
+  },
+  "auth": {
+    "signin": {
+      "title": "Sign in",
+      "description": "Sign in to your account to continue.",
+      "email": "Email address",
+      "emailPlaceholder": "Enter your email address",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create an account"
+    },
+    "signup": {
+      "title": "Create an account",
+      "description": "Create your account to get started.",
+      "email": "Email address",
+      "emailPlaceholder": "Enter your email address",
+      "password": "Password",
+      "passwordPlaceholder": "Create a password",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+    "errors": {
+      "invalid_input": "Please check the information you entered.",
+      "invalid_credentials": "The email address or password you entered is incorrect.",
+      "email_exists": "An account with this email address already exists.",
+      "server_error": "Something went wrong. Please try again."
+    }
 }

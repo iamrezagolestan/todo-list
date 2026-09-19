@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
+    "@types/pg": "^8.23.1",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.3.0",
     "dotenv-cli": "^11.0.0",
