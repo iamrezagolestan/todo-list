@@ -55,6 +55,7 @@ export const HomePage = ({ data }: { data: DataType }) => {
               // const isExist =
               return (
                 <TabsTrigger
+                key={item.id}
                   value={item.value}
                   className={`${locale === "fa" ? "ml-3" : "mr-3"}`}
                 >
@@ -66,9 +67,9 @@ export const HomePage = ({ data }: { data: DataType }) => {
           {days.map((contentItem) => {
             const tasks = data.filter((taskData) => taskData.days.includes(contentItem.id))
             return (
-              <TabsContent value={contentItem.value} className="w-3xl mt-10">
+              <TabsContent value={contentItem.value} className="w-3xl mt-10" key={contentItem.id}>
                 {tasks.map((dataItem) => (
-                      <Item className="border-b border-b-primary mb-2 rounded-none">
+                      <Item className="border-b border-b-primary mb-2 rounded-none" key={dataItem.id}>
                         <ItemMedia variant={"image"}><Checkbox className="cursor-pointer" id="isDone" name="isDone" /></ItemMedia>
                         <ItemContent>
                           <ItemTitle>{dataItem.title}</ItemTitle>

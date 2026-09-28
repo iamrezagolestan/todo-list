@@ -2,7 +2,7 @@
 
 import Form from "next/form";
 import React, { useActionState, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -64,6 +64,7 @@ const initialState: FormState = {
 
 export const TasksForms = () => {
   const t = useTranslations("tasksForm");
+  const locale = useLocale();
   const [descriptionLength, setDescriptionLength] = useState(0);
   const [showParents, setShowParents] = useState(false);
   const [taskData, setTaskData] = useState({});
@@ -77,7 +78,7 @@ export const TasksForms = () => {
       formData: FormData,
     ): Promise<FormState> => {
       const data = Object.fromEntries(formData.entries());
-      const days = formData.getAll("days");
+      const days = formData.getAll("days").map(Number);
       const errors: FormState["errors"] = {};
 
       // Name validation
@@ -100,10 +101,9 @@ export const TasksForms = () => {
           description: data.description,
           is_parent: data.isParent === "on",
           parent_id: data.parent_id === "none" ? null : data.parent_id,
-          days: [days],
+          days: days,
         }),
       });
-
       return {
         errors: {},
       };
@@ -120,17 +120,18 @@ export const TasksForms = () => {
       }
 
       const data = await response.json();
+      const parents = data.map((parent: { id: number; title: string }) => ({
+        label: parent.title,
+        value: String(parent.id),
+      }));
+      const realParents = parents.unshift({ label: "none", value: "none" });
+      console.log(realParents, parents);
 
-      setParentsItems(
-        data.map((parent: { id: number; title: string }) => ({
-          label: parent.title,
-          value: String(parent.id),
-        })),
-      );
+      setParentsItems(parents);
     };
 
     getParents();
-  }, []);
+  }, [isPending]);
 
   const daysItems = [
     { label: t("saturday"), value: "0" },
@@ -142,15 +143,6 @@ export const TasksForms = () => {
     { label: t("friday"), value: "6" },
   ];
 
-  // const daysItems = [
-  //   t("saturday"),
-  //   t("sunday"),
-  //   t("monday"),
-  //   t("tuesday"),
-  //   t("wednesday"),
-  //   t("thursday"),
-  //   t("friday"),
-  // ];
   const checkIsParent = (value: boolean) => {
     setShowParents(value);
     setTaskData((prev) => ({ ...prev, parent_id: "none" }));
@@ -193,6 +185,9 @@ export const TasksForms = () => {
                   multiple
                   autoHighlight
                   items={daysItems}
+                  isItemEqualToValue={(item, value) =>
+                    item.value === value.value
+                  }
                   defaultValue={[daysItems[0]]}
                   id="days"
                   name="days"
@@ -201,7 +196,7 @@ export const TasksForms = () => {
                     <ComboboxValue>
                       {(values) => (
                         <>
-                          {values.map((value :any) => (
+                          {values.map((value: any) => (
                             <ComboboxChip key={value.value}>
                               {value.label}
                             </ComboboxChip>
@@ -304,7 +299,11 @@ export const TasksForms = () => {
                   </InputGroupAddon>
                 </InputGroup>
 
-                <FieldDescription>{t("descriptionHint")}</FieldDescription>
+                <FieldDescription
+                  className={`${locale === "fa" ? "text-right" : "text-left"}`}
+                >
+                  {t("descriptionHint")}
+                </FieldDescription>
 
                 {state.errors.description && (
                   <FieldError>{state.errors.description}</FieldError>
