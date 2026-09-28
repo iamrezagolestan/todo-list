@@ -22,7 +22,11 @@
     "descriptionPlaceholder": "توضیحات تسک را بنویسید...",
     "descriptionHint": "مراحل انجام، رفتار مورد انتظار و نتیجه واقعی را وارد کنید.",
     "characters": "{count}/100 کاراکتر",
-    "submit": "ثبت"
+    "submit": "ثبت",
+    "nameRequired": "وارد کردن نام تسک الزامی است",
+    "daysRequired": "انتخاب حداقل یک روز الزامی است",
+    "descriptionRequired": "وارد کردن توضیحات الزامی است",
+    "submitting": "در حال ثبت..."
   },
   "auth": {
     "signin": {
@@ -45,10 +49,29 @@
       "passwordPlaceholder": "یک رمز عبور ایجاد کنید",
       "submit": "ایجاد حساب کاربری",
       "haveAccount": "قبلاً حساب کاربری دارید؟",
-      "signIn": "ورود"
+      "signIn": "ورود",
+      "emailRequired": "ایمیل اجباری هست",
+      "passwordRequired": "رمز عبور باید بیشتر از 8 کاراکتر باشد",
+      "loading": "درحال لود"
     },
     "showPassword": "نمایش رمز عبور",
     "hidePassword": "پنهان کردن رمز عبور"
+  },
+    "header": {
+      "brand": "مدیریت وظایف",
+      "home": "خانه",
+      "createTasks": "ایجاد وظایف",
+      "parentTasks": "وظایف والد"
+  },
+    "tasksList":{
+      "title": "لیست وظایف",
+      "saturday": "شنبه",
+      "sunday": "یکشنبه",
+      "monday": "دوشنبه",
+      "tuesday": "سه‌شنبه",
+      "wednesday": "چهارشنبه",
+      "thursday": "پنجشنبه",
+      "friday": "جمعه"
   },
     "errors": {
       "invalid_input": "لطفاً اطلاعات وارد شده را بررسی کنید.",

@@ -1,47 +1,70 @@
-import argon2 from "argon2";
 import { NextResponse } from "next/server";
-import { createUser, findUserByEmail } from "@/generatedTypes/queries/users.queries";
-import { db } from "@/lib/db";
-import { attachSessionCookie, createSessionForUser } from "@/lib/session";
+import bcrypt from "bcrypt";
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MIN_PASSWORD_LENGTH = 8;
+import { db } from "@/lib/db";
+import {
+  findUserByEmail,
+  createUser,
+} from "@/generatedTypes/queries/users.queries";
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-  const password = typeof body.password === "string" ? body.password : "";
+  try {
+    const body = await request.json();
+    const { email, password } = body;
+    
+    const normalizedEmail = email.trim().toLowerCase();
+    
+    if (!normalizedEmail || !password) {
+      return NextResponse.json(
+        {
+          message: "Email and password are required",
+        },
+        { status: 400 }
+      );
+    }
 
-  if (!EMAIL_PATTERN.test(email) || password.length < MIN_PASSWORD_LENGTH) {
-    return NextResponse.json({ error: "invalid_input" }, { status: 400 });
+    const existingUsers = await findUserByEmail.run(
+      {
+        email: normalizedEmail,
+      },
+      db
+    );
+
+    if (existingUsers.length > 0) {
+      return NextResponse.json(
+        {
+          message: "User already exists",
+        },
+        { status: 409 }
+      );
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const users = await createUser.run(
+      {
+        email: normalizedEmail,
+        password: hashedPassword,
+      },
+      db
+    );
+
+    const user = users[0];
+
+    return NextResponse.json(
+      {
+        user,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        message: "Something went wrong",
+      },
+      { status: 500 }
+    );
   }
-
-  const existingUsers = await findUserByEmail.run({ email }, db);
-
-  if (existingUsers.length > 0) {
-    return NextResponse.json({ error: "email_exists" }, { status: 409 });
-  }
-
-  const hashedPassword = await argon2.hash(password);
-
-  const [user] = await createUser.run(
-    {
-      email,
-      password: hashedPassword,
-    },
-    db,
-  );
-
-  const sessionToken = await createSessionForUser(user.id);
-
-  const response = NextResponse.json(
-    {
-      id: user.id,
-      email: user.email,
-    },
-    { status: 201 },
-  );
-  attachSessionCookie(response, sessionToken);
-
-  return response;
 }

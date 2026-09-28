@@ -22,7 +22,11 @@
     "descriptionPlaceholder": "Write task's description...",
     "descriptionHint": "Include steps to reproduce, expected behavior, and what actually happened.",
     "characters": "{count}/100 characters",
-    "submit": "Submit"
+    "submit": "Submit",
+    "nameRequired": "Task name is required",
+    "daysRequired": "Selecting at least one day is required",
+    "descriptionRequired": "Description is required",
+    "submitting": "Submitting..."
   },
   "auth": {
     "signin": {
@@ -34,7 +38,10 @@
       "passwordPlaceholder": "Enter your password",
       "submit": "Sign in",
       "noAccount": "Don't have an account?",
-      "createAccount": "Create an account"
+      "createAccount": "Create an account",
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password have to more than 8 characters.",
+      "loading": "loading"
     },
     "signup": {
       "title": "Create an account",
@@ -45,10 +52,29 @@
       "passwordPlaceholder": "Create a password",
       "submit": "Create account",
       "haveAccount": "Already have an account?",
-      "signIn": "Sign in"
+      "signIn": "Sign in",
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password have to more than 8 characters.",
+      "loading": "loading"
     },
     "showPassword": "Show password",
     "hidePassword": "Hide password"
+  },
+    "header": {
+      "brand": "Tasks Manager",
+      "home": "Home",
+      "createTasks": "Create Tasks",
+      "parentTasks": "Parent Tasks"
+  },
+    "tasksList":{
+      "title": "Tasks List",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday"
   },
     "errors": {
       "invalid_input": "Please check the information you entered.",

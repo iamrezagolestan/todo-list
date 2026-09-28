@@ -1,6 +1,8 @@
 /** Types generated for queries found in "db/queries/users.sql" */
 import { PreparedQuery } from '@pgtyped/runtime';
 
+export type NumberOrString = number | string;
+
 /** 'FindUserByEmail' parameters type */
 export interface IFindUserByEmailParams {
   email?: string | null | void;
@@ -76,5 +78,39 @@ const createUserIR: any = {"usedParamSet":{"email":true,"password":true},"params
  * ```
  */
 export const createUser = new PreparedQuery<ICreateUserParams,ICreateUserResult>(createUserIR);
+
+
+/** 'FindUserById' parameters type */
+export interface IFindUserByIdParams {
+  id?: NumberOrString | null | void;
+}
+
+/** 'FindUserById' return type */
+export interface IFindUserByIdResult {
+  created_at: Date;
+  email: string;
+  id: string;
+}
+
+/** 'FindUserById' query type */
+export interface IFindUserByIdQuery {
+  params: IFindUserByIdParams;
+  result: IFindUserByIdResult;
+}
+
+const findUserByIdIR: any = {"usedParamSet":{"id":true},"params":[{"name":"id","required":false,"transform":{"type":"scalar"},"locs":[{"a":63,"b":65}]}],"statement":"SELECT\n    id,\n    email,\n    created_at\nFROM users\nWHERE id = :id"};
+
+/**
+ * Query generated from SQL:
+ * ```
+ * SELECT
+ *     id,
+ *     email,
+ *     created_at
+ * FROM users
+ * WHERE id = :id
+ * ```
+ */
+export const findUserById = new PreparedQuery<IFindUserByIdParams,IFindUserByIdResult>(findUserByIdIR);
 
 

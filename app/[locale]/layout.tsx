@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { Header } from "@/components/widgets/header";
 
 const vazirmatn = Vazirmatn({subsets:['arabic'],variable:'--font-sans'})
 

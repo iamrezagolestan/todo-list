@@ -20,3 +20,12 @@ RETURNING
     id,
     email,
     created_at;
+
+/* @name FindUserById */
+
+SELECT
+    id,
+    email,
+    created_at
+FROM users
+WHERE id = :id;
