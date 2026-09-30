@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/item";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 type DataType = {
   id: string;
@@ -27,8 +28,7 @@ type DataType = {
   created_at: string;
 }[];
 export const HomePage = ({ data }: { data: DataType }) => {
-  const today = new Date().getDay();
-  console.log(today);
+    const [tasks , setTasks] = useState() 
   const locale = useLocale();
   const t = useTranslations("tasksList");
   const days = [
@@ -40,6 +40,25 @@ export const HomePage = ({ data }: { data: DataType }) => {
     { id: 5, value: "thursday", name: t("thursday") },
     { id: 6, value: "friday", name: t("friday") },
   ];
+    useEffect(() => {
+      const getTasks = async () => {
+        const response = await fetch("/api/tasks");
+  
+        if (!response.ok) {
+          return;
+        }
+  
+        const data = await response.json();
+  
+       setTasks(data);
+      };
+  
+      getTasks();
+    }, []);
+
+    if(!tasks){
+      return <div className="h-screen w-full">is loading...</div>
+    }
   return (
     <Card className="m-10 max-h-[calc(100vh-150px)] pb-10">
       <CardHeader>
@@ -65,10 +84,10 @@ export const HomePage = ({ data }: { data: DataType }) => {
             })}
           </TabsList>
           {days.map((contentItem) => {
-            const tasks = data.filter((taskData) => taskData.days.includes(contentItem.id))
+            const todayTasks = tasks.filter((taskData) => taskData.days.includes(contentItem.id))
             return (
               <TabsContent value={contentItem.value} className="w-3xl mt-10" key={contentItem.id}>
-                {tasks.map((dataItem) => (
+                {todayTasks.map((dataItem) => (
                       <Item className="border-b border-b-primary mb-2 rounded-none" key={dataItem.id}>
                         <ItemMedia variant={"image"}><Checkbox className="cursor-pointer" id="isDone" name="isDone" /></ItemMedia>
                         <ItemContent>

@@ -124,8 +124,7 @@ export const TasksForms = () => {
         label: parent.title,
         value: String(parent.id),
       }));
-      const realParents = parents.unshift({ label: "none", value: "none" });
-      console.log(realParents, parents);
+      parents.unshift({ label: "none", value: "none" });
 
       setParentsItems(parents);
     };
