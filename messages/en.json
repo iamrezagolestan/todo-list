@@ -19,14 +19,20 @@
     "parents": "Parents",
     "selectParent": "Select a parent",
     "descriptionLabel": "Description",
-    "descriptionPlaceholder": "Write task's description...",
+    "descriptionPlaceholder": "Write task\u0027s description...",
     "descriptionHint": "Include steps to reproduce, expected behavior, and what actually happened.",
     "characters": "{count}/100 characters",
     "submit": "Submit",
     "nameRequired": "Task name is required",
     "daysRequired": "Selecting at least one day is required",
     "descriptionRequired": "Description is required",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "none": "No parent",
+    "created": "Task created successfully.",
+    "loadingParents": "Loading parents…",
+    "retry": "Retry",
+    "previousParents": "Previous parents",
+    "nextParents": "More parents"
   },
   "auth": {
     "signin": {
@@ -37,7 +43,7 @@
       "password": "Password",
       "passwordPlaceholder": "Enter your password",
       "submit": "Sign in",
-      "noAccount": "Don't have an account?",
+      "noAccount": "Don\u0027t have an account?",
       "createAccount": "Create an account",
       "emailRequired": "Email is required",
       "passwordRequired": "Password have to more than 8 characters.",
@@ -60,26 +66,58 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password"
   },
-    "header": {
-      "brand": "Tasks Manager",
-      "home": "Home",
-      "createTasks": "Create Tasks",
-      "parentTasks": "Parent Tasks"
+  "header": {
+    "brand": "Tasks Manager",
+    "home": "Home",
+    "createTasks": "Create Tasks",
+    "parentTasks": "Parent Tasks",
+    "navigation": "Main navigation",
+    "toggleTheme": "Toggle light / dark theme",
+    "switchLanguage": "Switch language to Persian",
+    "otherLanguage": "Persian",
+    "signOut": "Sign out",
+    "signOutError": "Could not sign out. Please try again."
   },
-    "tasksList":{
-      "title": "Tasks List",
-      "saturday": "Saturday",
-      "sunday": "Sunday",
-      "monday": "Monday",
-      "tuesday": "Tuesday",
-      "wednesday": "Wednesday",
-      "thursday": "Thursday",
-      "friday": "Friday"
+  "tasksList": {
+    "title": "Tasks List",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "loading": "Loading tasks…",
+    "retry": "Retry",
+    "empty": "No tasks to display.",
+    "pagination": "Task pages",
+    "previous": "Previous",
+    "next": "Next",
+    "toggle": "Change completion for {title}",
+    "toggleDay": "Change completion for {title} on {day}",
+    "delete": "Delete {title}",
+    "automatic": "Completed automatically when every scheduled day of all children is done.",
+    "done": "Done",
+    "notDone": "Not done",
+    "confirmParentDelete": "Delete this task and all of its descendants? This cannot be undone.",
+    "confirmDelete": "Delete this task? This cannot be undone.",
+    "confirm": "Delete",
+    "cancel": "Cancel",
+    "parentsTitle": "Parent tasks",
+    "treeHint": "Open a parent to see its children. Each weekday has its own completion status.",
+    "chooseDay": "Choose a weekday",
+    "dayHint": "Choose a day and make room for what matters.",
+    "previousDay": "Previous day",
+    "nextDay": "Next day"
   },
-    "errors": {
-      "invalid_input": "Please check the information you entered.",
-      "invalid_credentials": "The email address or password you entered is incorrect.",
-      "email_exists": "An account with this email address already exists.",
-      "server_error": "Something went wrong. Please try again."
-    }
+  "errors": {
+    "invalid_input": "Please check the information you entered.",
+    "invalid_credentials": "The email address or password you entered is incorrect.",
+    "email_exists": "An account with this email address already exists.",
+    "server_error": "Something went wrong. Please try again.",
+    "unauthorized": "Please sign in again.",
+    "task_not_found": "This task no longer exists or is not available to your account.",
+    "invalid_parent": "Select an available parent from your own tasks.",
+    "parent_automatic": "Parent completion is calculated automatically from its children."
+  }
 }

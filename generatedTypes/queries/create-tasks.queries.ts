@@ -21,6 +21,7 @@ export interface ICreateTaskResult {
   days: numberArray;
   description: string | null;
   id: string;
+  is_done: boolean;
   is_parent: boolean;
   parent_id: string | null;
   title: string;

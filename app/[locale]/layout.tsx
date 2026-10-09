@@ -1,46 +1,48 @@
-import { Geist, Geist_Mono, Vazirmatn } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
-import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
-import { routing } from "@/i18n/routing";
+import { Geist_Mono, Vazirmatn } from "next/font/google";
+import "./globals.css";
+import { DirectionProvider } from "@base-ui/react/direction-provider";
 import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 
-const vazirmatn = Vazirmatn({subsets:['arabic'],variable:'--font-sans'})
+const vazirmatn = Vazirmatn({ subsets: ["arabic"], variable: "--font-sans" });
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-})
+});
 
 export default async function RootLayout({
   children,
-  params
+  params,
 }: Readonly<{
-  children: React.ReactNode,
-  params: Promise<{locale: string}>
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
-  const {locale} = await params
-    if (!routing.locales.includes(locale as 'en' | 'fa')) {
-    notFound()
+  const { locale } = await params;
+  if (locale !== "en" && locale !== "fa") {
+    notFound();
   }
-  const {message} = await getMessages()
+  const messages = await getMessages();
 
   return (
     <html
       lang={locale}
-      dir={locale === 'fa' ? 'rtl' : 'ltr'}
+      dir={locale === "fa" ? "rtl" : "ltr"}
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", vazirmatn.variable)}
     >
       <body>
-        <NextIntlClientProvider messages={message}>
+        <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            {children}
+            <DirectionProvider direction={locale === "fa" ? "rtl" : "ltr"}>
+              {children}
+            </DirectionProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
-  )
+  );
 }
