@@ -71,6 +71,13 @@ test("task API: independent days, ownership, nested parents and cascade deletion
     const leaf = await create("two-day child", false, nested);
     const sibling = await create("sibling", false, root, [0]);
     const standalone = await create("standalone", false, null, [2]);
+    await scenario("daily view excludes root and nested parents", async () => {
+      const result = await request("/api/tasks?mode=day&day=0", cookies[0]);
+      assert.equal(result.status, 200);
+      assert.ok(isRecord(result.data) && Array.isArray(result.data.tasks));
+      assert.deepEqual(new Set(result.data.tasks.map((task) => task.id)), new Set([leaf, sibling]));
+      assert.ok(result.data.tasks.every((task) => task.is_parent === false));
+    });
     await scenario(
       "requires authentication and validates bodies and query parameters",
       async () => {

@@ -7,7 +7,7 @@ SELECT t.*, ARRAY(
 FROM tasks t
 WHERE t.user_id = :user_id!
 AND (
-    (:mode! = 'day' AND :day!::integer = ANY(t.days))
+    (:mode! = 'day' AND NOT t.is_parent AND :day!::integer = ANY(t.days))
     OR (:mode! = 'parents' AND t.is_parent AND t.parent_id IS NULL)
     OR (:mode! = 'children' AND t.parent_id = :parent_id::bigint)
     OR (:mode! = 'choices' AND t.is_parent)

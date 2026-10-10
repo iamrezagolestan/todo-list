@@ -36,7 +36,7 @@ export interface IGetTasksQuery {
   result: IGetTasksResult;
 }
 
-const getTasksIR: any = {"usedParamSet":{"user_id":true,"mode":true,"day":true,"parent_id":true,"limit":true,"offset":true},"params":[{"name":"user_id","required":true,"transform":{"type":"scalar"},"locs":[{"a":286,"b":294}]},{"name":"mode","required":true,"transform":{"type":"scalar"},"locs":[{"a":307,"b":312},{"a":364,"b":369},{"a":432,"b":437},{"a":498,"b":503}]},{"name":"day","required":true,"transform":{"type":"scalar"},"locs":[{"a":326,"b":330}]},{"name":"parent_id","required":false,"transform":{"type":"scalar"},"locs":[{"a":470,"b":479}]},{"name":"limit","required":true,"transform":{"type":"scalar"},"locs":[{"a":580,"b":586}]},{"name":"offset","required":true,"transform":{"type":"scalar"},"locs":[{"a":604,"b":611}]}],"statement":"SELECT t.*, ARRAY(\n    SELECT c.day FROM task_completions c WHERE c.task_id = t.id AND c.is_done ORDER BY c.day\n) AS \"completed_days!\", EXISTS (\n    SELECT 1 FROM tasks child WHERE child.parent_id = t.id AND child.user_id = t.user_id\n) AS \"has_children!\"\nFROM tasks t\nWHERE t.user_id = :user_id!\nAND (\n    (:mode! = 'day' AND :day!::integer = ANY(t.days))\n    OR (:mode! = 'parents' AND t.is_parent AND t.parent_id IS NULL)\n    OR (:mode! = 'children' AND t.parent_id = :parent_id::bigint)\n    OR (:mode! = 'choices' AND t.is_parent)\n)\nORDER BY t.created_at DESC, t.id DESC\nLIMIT :limit!::integer OFFSET :offset!::integer"};
+const getTasksIR: any = {"usedParamSet":{"user_id":true,"mode":true,"day":true,"parent_id":true,"limit":true,"offset":true},"params":[{"name":"user_id","required":true,"transform":{"type":"scalar"},"locs":[{"a":286,"b":294}]},{"name":"mode","required":true,"transform":{"type":"scalar"},"locs":[{"a":307,"b":312},{"a":384,"b":389},{"a":452,"b":457},{"a":518,"b":523}]},{"name":"day","required":true,"transform":{"type":"scalar"},"locs":[{"a":346,"b":350}]},{"name":"parent_id","required":false,"transform":{"type":"scalar"},"locs":[{"a":490,"b":499}]},{"name":"limit","required":true,"transform":{"type":"scalar"},"locs":[{"a":600,"b":606}]},{"name":"offset","required":true,"transform":{"type":"scalar"},"locs":[{"a":624,"b":631}]}],"statement":"SELECT t.*, ARRAY(\n    SELECT c.day FROM task_completions c WHERE c.task_id = t.id AND c.is_done ORDER BY c.day\n) AS \"completed_days!\", EXISTS (\n    SELECT 1 FROM tasks child WHERE child.parent_id = t.id AND child.user_id = t.user_id\n) AS \"has_children!\"\nFROM tasks t\nWHERE t.user_id = :user_id!\nAND (\n    (:mode! = 'day' AND NOT t.is_parent AND :day!::integer = ANY(t.days))\n    OR (:mode! = 'parents' AND t.is_parent AND t.parent_id IS NULL)\n    OR (:mode! = 'children' AND t.parent_id = :parent_id::bigint)\n    OR (:mode! = 'choices' AND t.is_parent)\n)\nORDER BY t.created_at DESC, t.id DESC\nLIMIT :limit!::integer OFFSET :offset!::integer"};
 
 /**
  * Query generated from SQL:
@@ -49,7 +49,7 @@ const getTasksIR: any = {"usedParamSet":{"user_id":true,"mode":true,"day":true,"
  * FROM tasks t
  * WHERE t.user_id = :user_id!
  * AND (
- *     (:mode! = 'day' AND :day!::integer = ANY(t.days))
+ *     (:mode! = 'day' AND NOT t.is_parent AND :day!::integer = ANY(t.days))
  *     OR (:mode! = 'parents' AND t.is_parent AND t.parent_id IS NULL)
  *     OR (:mode! = 'children' AND t.parent_id = :parent_id::bigint)
  *     OR (:mode! = 'choices' AND t.is_parent)
